@@ -44,6 +44,8 @@ dependencies:
   go_router: 7.0.1
   flutter_screenutil: 5.8.4
   change_app_package_name: ^1.1.0
+  textfield_tags: ^2.0.2
+  animated_toggle_switch: ^0.8.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +60,7 @@ dev_dependencies:
   retrofit_generator: "^8.0.0"
   build_runner: ">=2.3.0 <4.0.0"
   json_serializable: ^6.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

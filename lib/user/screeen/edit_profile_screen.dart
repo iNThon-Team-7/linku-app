@@ -6,8 +6,8 @@ import 'package:linku/user/provider/auth_provider.dart';
 
 
 
-class RegisterScreen extends ConsumerWidget {
-  const RegisterScreen({super.key});
+class EditProfileScreen extends ConsumerWidget {
+  const EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +25,7 @@ class RegisterScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     Container(
-                      height: 124.h,
+                        height: 124.h,
                         child: Center(child: Text('회원가입',style: TextStyle(fontSize: 30),))),
                     Container(
                       padding: EdgeInsets.all(10),

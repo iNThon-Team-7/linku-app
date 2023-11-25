@@ -1,9 +1,5 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:linku/user/provider/auth_provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 class BoolSwitch extends StatefulWidget {
@@ -53,7 +49,7 @@ class _BoolSwitchState extends State<BoolSwitch> {
 }
 
 class EditingField extends StatefulWidget {
-  EditingField({Key? key,required this.controller}) : super(key: key);
+  EditingField({Key? key, required this.controller}) : super(key: key);
   TextfieldTagsController controller;
   @override
   State<EditingField> createState() => _EditingFieldState();
@@ -201,7 +197,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-
   final TextEditingController nickNameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
   final TextfieldTagsController tagsController = TextfieldTagsController();
@@ -220,102 +215,102 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: Center(
         child: SingleChildScrollView(
             child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Center(
-                          child: Text(
-                            '프로필',
-                            style: TextStyle(fontSize: 30),
-                          )),
-                      Container(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Center(
+                      child: Text(
+                    '프로필',
+                    style: TextStyle(fontSize: 30),
+                  )),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Column(children: [
+                      TextField(
+                        controller: nickNameController,
+                        decoration: InputDecoration(
+                          hintText: '닉네임을 입력해주세요',
+                          labelText: '닉네임',
+                        ),
+                      ),
+                      TextField(
+                        controller: ageController,
+                        decoration: InputDecoration(
+                          hintText: '나이을 입력해주세요',
+                          labelText: '나이',
+                        ),
+                      ),
+                      Padding(
                         padding: EdgeInsets.all(10),
-                        child: Column(children: [
-                          TextField(
-                            controller: nickNameController,
-                            decoration: InputDecoration(
-                              hintText: '닉네임을 입력해주세요',
-                              labelText: '닉네임',
-                            ),
-                          ),
-                          TextField(
-                            controller: ageController,
-                            decoration: InputDecoration(
-                              hintText: '나이을 입력해주세요',
-                              labelText: '나이',
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: BoolSwitch(
-                              func: onSwitchChanged,
-                              isSwitched:_isSwitched,
-                            ),
-                          )
-                        ]),
-                      ),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            '관심사',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          )),
-                      EditingField(controller: tagsController,),
-                    ],
+                        child: BoolSwitch(
+                          func: onSwitchChanged,
+                          isSwitched: _isSwitched,
+                        ),
+                      )
+                    ]),
                   ),
-                ),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.all(16),
-                  child: MaterialButton(
-                    padding: EdgeInsets.all(0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(0xffff6666),
-                      ),
-                      height: 54,
-                      child: Center(
-                          child: Text(
-                            '완료',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    ),
-                    onPressed: () {
-                      // validation
-                      if (nickNameController.text.isEmpty || ageController.text.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('데이터를 입력해주세요'),
-                          ),
-                        );
-                        return;
-                      }
-                      List tagList = [];
-                      tagsController.getTags!.forEach((element) {
-                        tagList.add(element);
-                      });
-                      final nickName = nickNameController.text;
-                      final age = ageController.text;
-                      final isMale = _isSwitched;
-                      final tags = tagList;
-
-
-                      //todo: send auth to server
-
-                      //route to profile editting screen
-                    },
-
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '관심사',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      )),
+                  EditingField(
+                    controller: tagsController,
                   ),
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.all(16),
+              child: MaterialButton(
+                padding: EdgeInsets.all(0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xffff6666),
+                  ),
+                  height: 54,
+                  child: Center(
+                      child: Text(
+                    '완료',
+                    style: TextStyle(color: Colors.white),
+                  )),
                 ),
-              ],
-            )),
+                onPressed: () {
+                  // validation
+                  if (nickNameController.text.isEmpty ||
+                      ageController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('데이터를 입력해주세요'),
+                      ),
+                    );
+                    return;
+                  }
+                  List tagList = [];
+                  tagsController.getTags!.forEach((element) {
+                    tagList.add(element);
+                  });
+                  final nickName = nickNameController.text;
+                  final age = ageController.text;
+                  final isMale = _isSwitched;
+                  final tags = tagList;
+
+                  //todo: send auth to server
+
+                  //route to profile editting screen
+                },
+              ),
+            ),
+          ],
+        )),
       ),
     );
   }
 }
-

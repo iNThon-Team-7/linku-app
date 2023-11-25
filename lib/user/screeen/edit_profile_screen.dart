@@ -19,7 +19,7 @@ class _BoolSwitchState extends State<BoolSwitch> {
       onChanged: (_) {
         setState(() {
           widget.isSwitched = !widget.isSwitched;
-          widget.func!(widget.isSwitched);
+          widget.func(widget.isSwitched);
         });
       },
       current: widget.isSwitched,
@@ -75,7 +75,7 @@ class _EditingFieldState extends State<EditingField> {
             'your',
             'favorite',
             'programming',
-            'language'
+            'language',
           ],
           textSeparators: const [' ', ','],
           letterCase: LetterCase.normal,
@@ -132,7 +132,7 @@ class _EditingFieldState extends State<EditingField> {
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 5.0),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 5.0),
+                                    horizontal: 10.0, vertical: 5.0,),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -141,7 +141,7 @@ class _EditingFieldState extends State<EditingField> {
                                       child: Text(
                                         '#$tag',
                                         style: const TextStyle(
-                                            color: Colors.white),
+                                            color: Colors.white,),
                                       ),
                                       onTap: () {
                                         //print("$tag selected");
@@ -158,11 +158,11 @@ class _EditingFieldState extends State<EditingField> {
                                       onTap: () {
                                         onTagDelete(tag);
                                       },
-                                    )
+                                    ),
                                   ],
                                 ),
                               );
-                            }).toList()),
+                            }).toList(),),
                           )
                         : null,
                   ),
@@ -224,7 +224,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Text(
                     '프로필',
                     style: TextStyle(fontSize: 30),
-                  )),
+                  ),),
                   Container(
                     padding: EdgeInsets.all(10),
                     child: Column(children: [
@@ -248,8 +248,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           func: onSwitchChanged,
                           isSwitched: _isSwitched,
                         ),
-                      )
-                    ]),
+                      ),
+                    ],),
                   ),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -258,7 +258,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         style: TextStyle(
                           fontSize: 16,
                         ),
-                      )),
+                      ),),
                   EditingField(
                     controller: tagsController,
                   ),
@@ -280,7 +280,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Text(
                     '완료',
                     style: TextStyle(color: Colors.white),
-                  )),
+                  ),),
                 ),
                 onPressed: () {
                   // validation
@@ -309,7 +309,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
           ],
-        )),
+        ),),
       ),
     );
   }

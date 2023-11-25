@@ -1,118 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:linku/common/const/color.dart';
+import 'package:linku/user/model/login_model.dart';
 import 'package:linku/user/provider/auth_provider.dart';
 
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordController2 = TextEditingController();
-
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
-
+    String email = '';
+    String password = '';
     return Scaffold(
       body: Center(
         child: Column(
           children: [
             Expanded(
               child: Padding(
-                padding:EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Container(
-                        height: 124.h,
-                        child: Center(child: Text('회원가입',style: TextStyle(fontSize: 30),))),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      height: 280.h,
-                      child:
-                      Column(
-                        children: [
-                          TextField(
-                            controller: emailController,
-                            decoration: InputDecoration(
-                              hintText: '이메일을 입력해주세요',
-                              labelText: '이메일',
-                            ),
-                          ),
-                          // add password text field
-                          TextField(
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                              helperText: '비밀번호는 8자 이상이어야 합니다',
-                              labelText: '비밀번호',
-                              hintText: '비밀번호를 입력해주세요',
-                            ),
-                          ),
-                          TextField(
-                            controller: passwordController2,
-                            decoration: InputDecoration(
-                              helperText: '비밀번호는 8자 이상이어야 합니다',
-                              labelText: '비밀번호 확인',
-                              hintText: '비밀번호를 입력해주세요',
-                            ),
-                          ),
-                        ],
-                      ),
+                padding: EdgeInsets.all(10),
+                child: Center(
+                  child: SizedBox(
+                    width: 124.h,
+                    height: 124.h,
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.contain,
                     ),
                   ],
                 ),
               ),
             ),
+            // add email text field
+            // add input filed
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  TextField(
+                    onChanged: (value) => {
+                      email = value,
+                    },
+                    decoration: InputDecoration(
+                      hintText: '이메일을 입력해주세요',
+                      labelText: '이메일',
+                    ),
+                  ),
+                  // add password text field
+                  TextField(
+                    onChanged: (value) => {
+                      password = value,
+                    },
+                    decoration: InputDecoration(
+                      helperText: '비밀번호는 8자 이상이어야 합니다',
+                      labelText: '비밀번호',
+                      hintText: '비밀번호를 입력해주세요',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // add register button
             Container(
               width: double.infinity,
               margin: EdgeInsets.all(16),
               child: MaterialButton(
                 onPressed: () {
-                  final email = emailController.text;
-                  final password = passwordController.text;
-                  final password2 = passwordController.text;
-
-                  //validation
-                  if (email=="" || password=="" || password2=="") {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('데이터가 비었습니다'),
+                  ref.read(authProvider.notifier).register(
+                        loginModel: LoginModel(
+                          email: email,
+                          password: password,
                         ),
                       );
-                      return;
-                    }
-                  if (password != password2) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('비밀번호가 다릅니다'),
-                      ),
-                    );
-                    return;
-                  }
-                  //todo: send auth to server
-
-
-                  //route to profile editting screen
-
-                  context.go('/edit_profile');
-
                 },
                 padding: EdgeInsets.all(0),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),color: Color(0xffff6666),),
+                    borderRadius: BorderRadius.circular(20),
+                    color: PRIMARY_COLOR,
+                  ),
                   height: 54,
-                  child: Center(child: Text('다음',style: TextStyle(color: Colors.white),)),),
+                  child: Center(
+                    child: Text(
+                      '회원가입',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
         ),
-      ),);
+      ),
+    );
   }
 }

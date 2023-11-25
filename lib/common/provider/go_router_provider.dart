@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:linku/common/screen/home_screen.dart';
 import 'package:linku/common/screen/splash_screen.dart';
 import 'package:linku/user/provider/auth_provider.dart';
 import 'package:linku/user/screeen/edit_profile_screen.dart';
@@ -15,7 +16,7 @@ final goRouterProvider = Provider<GoRouter>(
     final provider = ref.read(authProvider);
     return GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/login',
+      initialLocation: '/home',
       debugLogDiagnostics: true,
       refreshListenable: provider,
       //for test
@@ -35,7 +36,7 @@ final goRouterProvider = Provider<GoRouter>(
         ),
         GoRoute(
           path: '/home',
-          builder: (context, state) => Container(),
+          builder: (context, state) => HomeScreen(),
         ),
         GoRoute(
           path: '/pending',

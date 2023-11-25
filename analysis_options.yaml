@@ -1,0 +1,16 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: false
+    prefer_const_constructors: false
+    require_trailing_commas: true
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "lib/common/icons/**"
+  errors:
+    avoid_print: info
+    prefer_const_constructors: info
+    require_trailing_commas: warning

@@ -3,6 +3,7 @@ import 'package:date_time_picker_selector/date_time_picker_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:input_quantity/input_quantity.dart';
 import 'package:number_selector/number_selector.dart';
 import 'package:search_choices/search_choices.dart';
 
@@ -18,11 +19,20 @@ class ProposeScreen extends ConsumerStatefulWidget {
 
 class _ProposeScreenState extends ConsumerState<ProposeScreen> {
   final tags = List.generate(10, (index) => 'suggest $index');
+  int filterValue = 2;
+  int minAge = 0;
+  int maxAge = 100;
+  String title = '';
+  String tag = '';
+  String place = '';
+  String content = '';
+  int maxPeople = 1;
+  String dateTime = '';
+
 
   @override
   Widget build(BuildContext context) {
     bool isOnline = ref.watch(isOnlineProvider);
-    String selectTagValue = ref.watch(selectTagValueProvider);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -44,11 +54,18 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               child: TextField(
+                onChanged: (value) {
+                  title = value;
+                },
                 decoration: InputDecoration(
                   hintText: '제목을 입력해주세요',
                   labelText: '제목',
                 ),
               ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(padding: EdgeInsets.all(10), child: Text('태그')),
             ),
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -61,10 +78,11 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
                       ),
                     )
                     .toList(),
-                value: selectTagValue,
+                // value: selectTagValue,
+                value:tag,
                 hint: "Select one",
                 onChanged: (value) {
-                  ref.read(selectTagValueProvider.notifier).state = value;
+                    tag = value;
                 },
                 isExpanded: true,
               ),
@@ -78,7 +96,7 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
               min: 1,
               max: 50,
               onUpdate: (number) {
-                // Your magic here
+                maxPeople = number;
               },
             ),
             Padding(
@@ -97,16 +115,17 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
                 },
                 onChanged: (val) => print(val),
                 validator: (val) {
-                  print(val);
                   return null;
                 },
-                onSaved: (val) => print(val),
+                onSaved: (val) {
+                  dateTime = val!;
+                },
               ),
             ),
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(5),
                 child: AnimatedToggleSwitch<bool>.dual(
                   onChanged: (_) {
                     ref.read(isOnlineProvider.notifier).state =
@@ -143,10 +162,142 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               child: TextField(
+                onChanged: (value) {
+                  place = value;
+                },
                 readOnly: isOnline,
                 decoration: InputDecoration(
                   hintText: '장소를 입력해주세요',
                   labelText: '장소',
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              child: TextField(
+                onChanged: (value) {
+                  content = value;
+                },
+                decoration: InputDecoration(
+                  hintText: '내용을 입력해주세요',
+                  labelText: '내용',
+                ),
+              ),
+            ),
+            //filter
+
+            SizedBox(height: 16.0),
+           Row(
+             children: [
+               Column(
+                 children: [
+                   Text('최소 나이'),
+                   Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                     child: InputQty(
+                       maxVal: 100,
+                       initVal: 0,
+                       minVal: 0,
+                       steps: 1,
+                       onQtyChanged: (val) {
+                         minAge = val;
+                       },
+                     ),
+                   ),
+                 ],
+               ),
+               Column(
+                 children: [
+                   Text('최대 나이'),
+                   Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                     child: InputQty(
+                       maxVal: 100,
+                       initVal: 100,
+                       minVal: 0,
+                       steps: 1,
+                       onQtyChanged: (val) {
+                         maxAge = val;
+                       },
+                     ),
+                   ),
+                 ],
+               ),
+               AnimatedToggleSwitch<int>.rolling(
+                 current: filterValue,
+                 iconBuilder: (i, isActive) {
+                   String label;
+                   Color textColor;
+                   switch (i) {
+                     case 0:
+                       label = "남자만";
+                       textColor = isActive ? Colors.red : Colors.grey;
+                       break;
+                     case 1:
+                       label = "여자만";
+                       textColor = isActive ? Colors.green : Colors.grey;
+                       break;
+                     case 2:
+                       label = "무관";
+                       textColor = isActive ? Colors.blue : Colors.grey;
+                       break;
+                     default:
+                       label = "";
+                       textColor = Colors.grey;
+                       break;
+                   }
+
+                   return Text(
+                     label,
+                     style: TextStyle(
+                       color: textColor,
+                       fontWeight: FontWeight.bold,
+                     ),
+                   );
+                 },
+                 values: const [0, 1, 2],
+                 onChanged: (i) => setState(() => filterValue = i),
+                 style: ToggleStyle(
+                   indicatorColor: Colors.white,
+                   borderColor: Colors.transparent,
+                   backgroundColor: Colors.grey[200],
+                   boxShadow: const [
+                     BoxShadow(
+                       color: Colors.black26,
+                       spreadRadius: 1,
+                       blurRadius: 2,
+                       offset: Offset(0, 1.5),
+                     )
+                   ],
+                 ),
+               ),
+             ],
+           ),
+
+
+
+
+            //submit
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                      final rettitle =  title;
+                      final rettag = tag;
+                      final retmaxAge = maxAge;
+                      final retminAge = minAge;
+                      final retisOnline = isOnline;
+                      final retplace = place;
+                      final retcontent = content;
+                      final retmaxPeople = maxPeople;
+                      final retdatetime = dateTime;//2023-11-29 23:12
+                      final retfilterValue = filterValue>2?"무관":filterValue==0?"남자만":"여자만";
+
+                  },
+                  child: Text('제출하기'),
                 ),
               ),
             ),

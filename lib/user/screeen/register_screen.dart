@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:linku/user/provider/auth_provider.dart';
 
 
 
-class LoginScreen extends ConsumerWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends ConsumerWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,26 +39,26 @@ class LoginScreen extends ConsumerWidget {
             Container(
               padding: EdgeInsets.all(10),
               child:
-                Column(
-                  children: [
-                    TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        hintText: '이메일을 입력해주세요',
-                        labelText: '이메일',
-                      ),
+              Column(
+                children: [
+                  TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      hintText: '이메일을 입력해주세요',
+                      labelText: '이메일',
                     ),
-                    // add password text field
-                    TextField(
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        helperText: '비밀번호는 8자 이상이어야 합니다',
-                        labelText: '비밀번호',
-                        hintText: '비밀번호를 입력해주세요',
-                      ),
+                  ),
+                  // add password text field
+                  TextField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      helperText: '비밀번호는 8자 이상이어야 합니다',
+                      labelText: '비밀번호',
+                      hintText: '비밀번호를 입력해주세요',
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ),
             Container(
               width: double.infinity,
@@ -66,19 +67,16 @@ class LoginScreen extends ConsumerWidget {
                 onPressed: () {
                   final email = emailController.text;
                   final password = passwordController.text;
-                  // todo: generating auth model
-
                   //send auth to server
-
-                  // route to home screen  -> for test
-                  context.push('/home');
+                  ref.read(authProvider).login();
+                  //route to main screen
                 },
                 padding: EdgeInsets.all(0),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),color: Color(0xffff6666),),
                   height: 54,
-                    child: Center(child: Text('로그인',style: TextStyle(color: Colors.white),)),),
+                  child: Center(child: Text('로그인',style: TextStyle(color: Colors.white),)),),
               ),
             ),
             // add register button
@@ -93,10 +91,10 @@ class LoginScreen extends ConsumerWidget {
                 },
                 padding: EdgeInsets.all(0),
                 child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),color: Color(0xffff6666),),
-                    height: 54,
-                    child: Center(child: Text('회원가입',style: TextStyle(color: Colors.white),)),),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),color: Color(0xffff6666),),
+                  height: 54,
+                  child: Center(child: Text('회원가입',style: TextStyle(color: Colors.white),)),),
               ),
             ),
           ],

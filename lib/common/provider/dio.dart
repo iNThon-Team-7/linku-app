@@ -31,7 +31,7 @@ class CustomExceptionHandler extends Interceptor {
       final token = await storage.read(key: accessTokenKey);
 
       options.headers.addAll({
-        'ACCESS_AUTHORIZATION': 'Bearer $token',
+        'Authorization': 'Bearer $token',
       });
     }
 
@@ -55,7 +55,7 @@ class CustomExceptionHandler extends Interceptor {
     final refreshToken = await storage.read(key: refreshTokenKey);
 
     if (refreshToken == null) {
-      handler.reject(err);
+      return handler.reject(err);
     }
 
     final isStatus401 = err.response?.statusCode == 401;
@@ -66,7 +66,7 @@ class CustomExceptionHandler extends Interceptor {
       final dio = Dio();
 
       try {
-        final resp = await dio.patch(
+        final resp = await dio.post(
           '$ip/auth/refresh',
           options: Options(),
           data: {
@@ -94,7 +94,10 @@ class CustomExceptionHandler extends Interceptor {
         return handler.resolve(response);
       } on DioException catch (e) {
         if (e.response?.statusCode == 401) {
-          return;
+          await storage.delete(key: accessTokenKey);
+          await storage.delete(key: refreshTokenKey);
+
+          return handler.reject(e);
         }
         return handler.reject(e);
       }

@@ -41,10 +41,10 @@ class FcmTokenStateNotifier extends StateNotifier<String> {
 
   Future<void> uploadToken() async {
     final token = state;
-    await dio.put(
-      '$ip/api/fcm/token',
+    await dio.post(
+      '$ip/auth/fcm',
       data: {
-        'firebaseToken': token,
+        'fcmToken': token,
       },
       options: Options(
         headers: {

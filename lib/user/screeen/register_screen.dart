@@ -5,16 +5,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:linku/user/provider/auth_provider.dart';
 
 
-
-class RegisterScreen extends ConsumerWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final fcm = ref.watch(fcmTokenProvider);
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController passwordController2 = TextEditingController();
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordController2 = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -25,7 +30,7 @@ class RegisterScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     Container(
-                      height: 124.h,
+                        height: 124.h,
                         child: Center(child: Text('회원가입',style: TextStyle(fontSize: 30),))),
                     Container(
                       padding: EdgeInsets.all(10),
@@ -74,10 +79,20 @@ class RegisterScreen extends ConsumerWidget {
                   final password2 = passwordController.text;
 
                   //validation
-                  if (email.isEmpty || password.isEmpty || password2.isEmpty) {
-                    return;
-                  }
+                  if (email=="" || password=="" || password2=="") {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('데이터가 비었습니다'),
+                        ),
+                      );
+                      return;
+                    }
                   if (password != password2) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('비밀번호가 다릅니다'),
+                      ),
+                    );
                     return;
                   }
                   //todo: send auth to server
@@ -85,7 +100,7 @@ class RegisterScreen extends ConsumerWidget {
 
                   //route to profile editting screen
 
-
+                  context.go('/edit_profile');
 
                 },
                 padding: EdgeInsets.all(0),

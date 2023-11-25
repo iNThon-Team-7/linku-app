@@ -6,14 +6,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class LoginScreen extends ConsumerWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final fcm = ref.watch(fcmTokenProvider);
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
 
+    print('newssss');
     return Scaffold(
       body: Center(
         child: Column(

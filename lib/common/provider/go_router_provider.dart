@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:linku/common/screen/splash_screen.dart';
 import 'package:linku/user/provider/auth_provider.dart';
+import 'package:linku/user/screeen/edit_profile_screen.dart';
 import 'package:linku/user/screeen/login_screen.dart';
 import 'package:linku/user/screeen/register_screen.dart';
 
@@ -32,8 +33,8 @@ final goRouterProvider = Provider<GoRouter>(
           builder: (context, state) => RegisterScreen(),
         ),
         GoRoute(
-          path: '/register',
-          builder: (context, state) => RegisterScreen(),
+          path: '/edit_profile',
+          builder: (context, state) => EditProfileScreen(),
         ),
       ],
     );

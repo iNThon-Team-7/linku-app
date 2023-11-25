@@ -4,8 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:group_list_view/group_list_view.dart';
-import 'package:linku/user/model/login_model.dart';
-import 'package:linku/user/provider/auth_provider.dart';
+import 'package:linku/user/screeen/widgets/profile_card.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -34,7 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   }
 
   Map<String, List> _elements = {
-    'Team A': [['Klay Lewis'], 'Ehsan Woodard', 'River Bains'],
+    'Team A': ['Klay Lewis', 'Ehsan Woodard', 'River Bains'],
     'Team B': ['Toyah Downs', 'Tyla Kane'],
     'Team C': ['Marcus Romero', 'Farrah Parkes', 'Fay Lawson', 'Asif Mckay'],
     'Team D': [
@@ -42,14 +41,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       'Ayisha Burn',
       'Josie Hayden',
       'Kenan Walls',
-      'Mario Powers'
+      'Mario Powers',
     ],
     'Team Q': ['Toyah Downs', 'Tyla Kane', 'Toyah Downs'],
   };
 
   @override
   Widget build(BuildContext context) {
-    print(_elements.keys.toList().length);
     return Scaffold(
       body: Center(
         child: Column(
@@ -69,7 +67,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 700.h,
               child: GroupListView(
                 sectionsCount: _elements.keys.toList().length,
@@ -94,7 +92,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 separatorBuilder: (context, index) => SizedBox(height: 10),
                 sectionSeparatorBuilder: (context, section) => SizedBox(height: 10),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -122,6 +120,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             titleStyle: TextStyle(fontSize: 16, color: Colors.white),
             onPress: () {
               _animationController.reverse();
+              context.push('/propose');
             },
           ),
           //Floating action menu item
@@ -133,6 +132,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             titleStyle: TextStyle(fontSize: 16, color: Colors.white),
             onPress: () {
               _animationController.reverse();
+              context.push('/search');
             },
           ),
         ],
@@ -156,37 +156,4 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   }
 }
 
-class ProfileCard extends StatelessWidget {
-  const ProfileCard({super.key, required this.title,required this.imageUrl});
-  final String title;
-  final String imageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Card(
-        elevation: 8,
-        child: ListTile(
-          contentPadding:
-          const EdgeInsets.symmetric(horizontal: 18, vertical: 10.0),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.network(
-            imageUrl,
-              fit: BoxFit.cover,
-              height: 50.h,
-              width: 50.h,
-            ),
-          ),
-          title: Text(
-            title,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-          ),
-          trailing: Icon(Icons.arrow_forward_ios),
-        ),
-      ),
-    );
-  }
-}
 

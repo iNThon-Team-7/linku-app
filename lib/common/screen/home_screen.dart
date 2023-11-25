@@ -78,6 +78,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   return ProfileCard(
                     imageUrl: 'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
                     title: 'Klay Lewis',
+                    subTitle: '20131101:0102',
                   );
                 },
                 groupHeaderBuilder: (BuildContext context, int section) {

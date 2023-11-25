@@ -8,7 +8,6 @@ import 'package:number_selector/number_selector.dart';
 import 'package:search_choices/search_choices.dart';
 
 final isOnlineProvider = StateProvider.autoDispose<bool>((ref) => false);
-final selectTagValueProvider = StateProvider.autoDispose<String>((ref) => '');
 
 class ProposeScreen extends ConsumerStatefulWidget {
   const ProposeScreen({Key? key}) : super(key: key);

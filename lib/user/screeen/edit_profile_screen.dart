@@ -23,7 +23,7 @@ class _BoolSwitchState extends State<BoolSwitch> {
       onChanged: (_) {
         setState(() {
           widget.isSwitched = !widget.isSwitched;
-          widget.func!(!widget.isSwitched);
+          widget.func!(widget.isSwitched);
         });
       },
       current: widget.isSwitched,
@@ -209,6 +209,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void onSwitchChanged(bool value) {
     _isSwitched = value;
+    print('update state to');
+    print(_isSwitched);
   }
 
   @override
@@ -270,6 +272,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   width: double.infinity,
                   margin: EdgeInsets.all(16),
                   child: MaterialButton(
+                    padding: EdgeInsets.all(0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color(0xffff6666),
+                      ),
+                      height: 54,
+                      child: Center(
+                          child: Text(
+                            '완료',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
                     onPressed: () {
                       // validation
                       if (nickNameController.text.isEmpty || ageController.text.isEmpty) {
@@ -294,19 +309,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                       //route to profile editting screen
                     },
-                    padding: EdgeInsets.all(0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(0xffff6666),
-                      ),
-                      height: 54,
-                      child: Center(
-                          child: Text(
-                            '완료',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    ),
+
                   ),
                 ),
               ],

@@ -5,6 +5,7 @@ import 'package:linku/common/const/color.dart';
 import 'package:linku/user/model/login_model.dart';
 import 'package:linku/user/provider/auth_provider.dart';
 
+
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 
@@ -32,7 +33,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       'assets/images/logo.png',
                       fit: BoxFit.contain,
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),

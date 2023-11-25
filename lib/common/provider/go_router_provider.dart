@@ -13,10 +13,11 @@ final goRouterProvider = Provider<GoRouter>(
     final provider = ref.read(authProvider);
     return GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/splash',
+      initialLocation: '/login',
       debugLogDiagnostics: true,
       refreshListenable: provider,
-      redirect: provider.redirectAuthLogic,
+      //for test
+      // redirect: provider.redirectAuthLogic,
       routes: [
         GoRoute(
           path: '/splash',
@@ -25,6 +26,10 @@ final goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/login',
           builder: (context, state) => LoginScreen(),
+        ),
+        GoRoute(
+          path: '/register',
+          builder: (context, state) => RegisterScreen(),
         ),
         GoRoute(
           path: '/register',

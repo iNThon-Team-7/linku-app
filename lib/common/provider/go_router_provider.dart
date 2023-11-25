@@ -7,7 +7,9 @@ import 'package:linku/user/provider/auth_provider.dart';
 import 'package:linku/user/screeen/edit_profile_screen.dart';
 import 'package:linku/user/screeen/login_screen.dart';
 import 'package:linku/user/screeen/pending_screen.dart';
+import 'package:linku/user/screeen/propose_screen.dart';
 import 'package:linku/user/screeen/register_screen.dart';
+import 'package:linku/user/screeen/search_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -45,6 +47,14 @@ final goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/edit_profile',
           builder: (context, state) => EditProfileScreen(),
+        ),
+        GoRoute(
+          path: '/propose',
+          builder: (context, state) => ProposeScreen(),
+        ),
+        GoRoute(
+          path: '/search',
+          builder: (context, state) => SearchScreen(),
         ),
       ],
     );

@@ -28,7 +28,7 @@ class _BoolSwitchState extends State<BoolSwitch> {
       spacing: 50.0,
       style: const ToggleStyle(
         borderColor: Colors.transparent,
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             color: Colors.black26,
             spreadRadius: 1,
@@ -204,8 +204,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void onSwitchChanged(bool value) {
     _isSwitched = value;
-    print('update state to');
-    print(_isSwitched);
   }
 
   @override

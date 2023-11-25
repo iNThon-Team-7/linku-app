@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({super.key, required this.title,required this.imageUrl});
+  const ProfileCard({super.key, required this.title,required this.imageUrl, required this.subTitle});
   final String title;
   final String imageUrl;
+  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,10 @@ class ProfileCard extends StatelessWidget {
           title: Text(
             title,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          ),
+          subtitle: Text(
+            subTitle,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
           ),
           trailing: Icon(Icons.arrow_forward_ios),
         ),

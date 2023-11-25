@@ -65,6 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   return ProfileCard(
                     imageUrl: 'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
                     title: 'Klay Lewis',
+                    subTitle: '20131101:1200',
                   );
                 },
                 groupHeaderBuilder: (BuildContext context, int section) {

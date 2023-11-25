@@ -58,6 +58,8 @@ void main() async {
     ),
   );
 
+  container.read(fcmTokenProvider);
+
   FirebaseMessaging.onMessage
       .listen((message) => fcmMessageHandler(message, container));
 

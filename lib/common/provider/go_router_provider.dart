@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:linku/common/screen/splash_screen.dart';
 import 'package:linku/user/provider/auth_provider.dart';
 import 'package:linku/user/screeen/login_screen.dart';
+import 'package:linku/user/screeen/pending_screen.dart';
 import 'package:linku/user/screeen/register_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -29,6 +30,14 @@ final goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/register',
           builder: (context, state) => RegisterScreen(),
+        ),
+        GoRoute(
+          path: '/home',
+          builder: (context, state) => Container(),
+        ),
+        GoRoute(
+          path: '/pending',
+          builder: (context, state) => PendingScreen(),
         ),
       ],
     );

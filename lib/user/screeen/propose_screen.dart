@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:input_quantity/input_quantity.dart';
 import 'package:number_selector/number_selector.dart';
 import 'package:search_choices/search_choices.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final isOnlineProvider = StateProvider.autoDispose<bool>((ref) => false);
 
@@ -49,6 +50,94 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
                   ),
                 ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                AnimatedToggleSwitch<int>.rolling(
+                  current: filterValue,
+                  iconBuilder: (i, isActive) {
+                    String label;
+                    Color textColor;
+                    switch (i) {
+                      case 0:
+                        label = "남자만";
+                        textColor = isActive ? Colors.red : Colors.grey;
+                        break;
+                      case 1:
+                        label = "여자만";
+                        textColor = isActive ? Colors.green : Colors.grey;
+                        break;
+                      case 2:
+                        label = "무관";
+                        textColor = isActive ? Colors.blue : Colors.grey;
+                        break;
+                      default:
+                        label = "";
+                        textColor = Colors.grey;
+                        break;
+                    }
+
+                    return Text(
+                      label,
+                      style: TextStyle(
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
+                  values: const [0, 1, 2],
+                  onChanged: (i) => setState(() => filterValue = i),
+                  style: ToggleStyle(
+                    indicatorColor: Colors.white,
+                    borderColor: Colors.transparent,
+                    backgroundColor: Colors.grey[200],
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: Offset(0, 1.5),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(right: 10,left: 10),
+                  padding: EdgeInsets.all(5),
+                  child: AnimatedToggleSwitch<bool>.dual(
+                    onChanged: (_) {
+                      ref.read(isOnlineProvider.notifier).state =
+                      !ref.read(isOnlineProvider.notifier).state;
+                    },
+                    current: isOnline,
+                    first: true,
+                    second: false,
+                    spacing: 50.0,
+                    style: const ToggleStyle(
+                      borderColor: Colors.transparent,
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black26,
+                          spreadRadius: 1,
+                          blurRadius: 2,
+                          offset: Offset(0, 1.5),
+                        ),
+                      ],
+                    ),
+                    borderWidth: 5.0,
+                    height: 55,
+                    styleBuilder: (b) => ToggleStyle(
+                        indicatorColor: b ? Colors.red : Colors.green),
+                    iconBuilder: (value) => value
+                        ? Icon(Icons.computer)
+                        : Icon(Icons.door_front_door_outlined),
+                    textBuilder: (value) => value
+                        ? Center(child: Text('온라인'))
+                        : Center(child: Text('오프라인')),
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
@@ -121,45 +210,10 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
                 },
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: EdgeInsets.all(5),
-                child: AnimatedToggleSwitch<bool>.dual(
-                  onChanged: (_) {
-                    ref.read(isOnlineProvider.notifier).state =
-                        !ref.read(isOnlineProvider.notifier).state;
-                  },
-                  current: isOnline,
-                  first: true,
-                  second: false,
-                  spacing: 50.0,
-                  style: const ToggleStyle(
-                    borderColor: Colors.transparent,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black26,
-                        spreadRadius: 1,
-                        blurRadius: 2,
-                        offset: Offset(0, 1.5),
-                      ),
-                    ],
-                  ),
-                  borderWidth: 5.0,
-                  height: 55,
-                  styleBuilder: (b) => ToggleStyle(
-                      indicatorColor: b ? Colors.red : Colors.green),
-                  iconBuilder: (value) => value
-                      ? Icon(Icons.computer)
-                      : Icon(Icons.door_front_door_outlined),
-                  textBuilder: (value) => value
-                      ? Center(child: Text('온라인'))
-                      : Center(child: Text('오프라인')),
-                ),
-              ),
-            ),
+
+
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
               child: TextField(
                 onChanged: (value) {
                   place = value;
@@ -170,6 +224,30 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
                   labelText: '장소',
                 ),
               ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(padding: EdgeInsets.all(10), child: Text('최소나이')),
+            ),
+            NumberSelector(
+              current: 1,
+              min: 1,
+              max: 100,
+              onUpdate: (number) {
+                minAge = number;
+              },
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(padding: EdgeInsets.all(10), child: Text('최고연령')),
+            ),
+            NumberSelector(
+              current: 100,
+              min: 1,
+              max: 100,
+              onUpdate: (number) {
+                maxAge = number;
+              },
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
@@ -186,96 +264,6 @@ class _ProposeScreenState extends ConsumerState<ProposeScreen> {
             //filter
 
             SizedBox(height: 16.0),
-           Row(
-             children: [
-               Column(
-                 children: [
-                   Text('최소 나이'),
-                   Padding(
-                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                     child: InputQty(
-                       maxVal: 100,
-                       initVal: 0,
-                       minVal: 0,
-                       steps: 1,
-                       onQtyChanged: (val) {
-                         minAge = val;
-                       },
-                     ),
-                   ),
-                 ],
-               ),
-               Column(
-                 children: [
-                   Text('최대 나이'),
-                   Padding(
-                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                     child: InputQty(
-                       maxVal: 100,
-                       initVal: 100,
-                       minVal: 0,
-                       steps: 1,
-                       onQtyChanged: (val) {
-                         maxAge = val;
-                       },
-                     ),
-                   ),
-                 ],
-               ),
-               AnimatedToggleSwitch<int>.rolling(
-                 current: filterValue,
-                 iconBuilder: (i, isActive) {
-                   String label;
-                   Color textColor;
-                   switch (i) {
-                     case 0:
-                       label = "남자만";
-                       textColor = isActive ? Colors.red : Colors.grey;
-                       break;
-                     case 1:
-                       label = "여자만";
-                       textColor = isActive ? Colors.green : Colors.grey;
-                       break;
-                     case 2:
-                       label = "무관";
-                       textColor = isActive ? Colors.blue : Colors.grey;
-                       break;
-                     default:
-                       label = "";
-                       textColor = Colors.grey;
-                       break;
-                   }
-
-                   return Text(
-                     label,
-                     style: TextStyle(
-                       color: textColor,
-                       fontWeight: FontWeight.bold,
-                     ),
-                   );
-                 },
-                 values: const [0, 1, 2],
-                 onChanged: (i) => setState(() => filterValue = i),
-                 style: ToggleStyle(
-                   indicatorColor: Colors.white,
-                   borderColor: Colors.transparent,
-                   backgroundColor: Colors.grey[200],
-                   boxShadow: const [
-                     BoxShadow(
-                       color: Colors.black26,
-                       spreadRadius: 1,
-                       blurRadius: 2,
-                       offset: Offset(0, 1.5),
-                     )
-                   ],
-                 ),
-               ),
-             ],
-           ),
-
-
-
-
             //submit
             Padding(
               padding: const EdgeInsets.all(10.0),

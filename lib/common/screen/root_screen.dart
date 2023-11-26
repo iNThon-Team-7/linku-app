@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:linku/common/const/color.dart';
 import 'package:linku/common/layout/default_layout.dart';
 import 'package:linku/user/screeen/profile_screen.dart';
+import 'package:linku/user/screeen/propose_screen.dart';
 
 class RootScreen extends StatelessWidget {
   final Widget child;
@@ -14,7 +15,11 @@ class RootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-      title: child is ProfileScreen ? '내 정보' : null,
+      title: child is ProfileScreen
+          ? '내 정보'
+          : child is ProposeScreen
+              ? '링쿠하기'
+              : '링쿠',
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: PRIMARY_COLOR,
         unselectedItemColor: TEXT_COLOR,
@@ -28,10 +33,10 @@ class RootScreen extends StatelessWidget {
               context.go('/home');
               break;
             case 1:
-              context.go('/history');
+              context.go('/propose');
               break;
             case 2:
-              context.go('/alert');
+              context.go('/history');
               break;
             case 3:
               context.go('/profile');
@@ -41,8 +46,8 @@ class RootScreen extends StatelessWidget {
         currentIndex: () {
           final location = GoRouterState.of(context).location;
           if (location.startsWith('/home')) return 0;
-          if (location.startsWith('/history')) return 1;
-          if (location.startsWith('/alert')) return 2;
+          if (location.startsWith('/propose')) return 1;
+          if (location.startsWith('/history')) return 2;
           if (location.startsWith('/profile')) return 3;
           return 0;
         }(),
@@ -52,12 +57,12 @@ class RootScreen extends StatelessWidget {
             label: '홈',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: '나의 예약',
+            icon: Icon(Icons.link),
+            label: '링쿠하기',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: '알림',
+            icon: Icon(Icons.history),
+            label: '기록',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

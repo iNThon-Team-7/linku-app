@@ -33,7 +33,7 @@ class UserModelError extends UserModelBase {
 class UserModel extends UserModelBase {
   final int id;
   final String name;
-  final String intro;
+  final String? intro;
   final String? email;
   final UserRole? role;
   final int? age;

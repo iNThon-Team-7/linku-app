@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +21,7 @@ class EditProfileScreen extends ConsumerWidget {
     if (userModel is! UserModel) {
       return const Center(child: CircularProgressIndicator());
     }
-    final user = userModel
+    final user = userModel;
     final bool isAgeSetted = user.age != null;
     final bool isGenderSetted = user.gender != null;
     final updateProfile = ref.watch(updateProfileProvider);

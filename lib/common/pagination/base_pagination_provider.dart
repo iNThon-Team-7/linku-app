@@ -12,8 +12,8 @@ class BasePaginationStateNotifier<T extends BasePaginationRepository<U>, U>
 
   Future<List<U>> fetch({
     required PagingController controller,
-    int page = 0,
-    int size = 20,
+    int page = 1,
+    int size = 10,
   }) async {
     try {
       final data = await repository.fetch(
@@ -26,6 +26,10 @@ class BasePaginationStateNotifier<T extends BasePaginationRepository<U>, U>
       if (data.isEmpty) {
         controller.appendLastPage([]);
         return [];
+      }
+      if (data.length < size) {
+        controller.appendLastPage(data);
+        return data;
       }
       controller.appendPage(data, page + 1);
       return data;

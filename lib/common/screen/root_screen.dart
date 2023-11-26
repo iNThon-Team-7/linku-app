@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:linku/common/const/color.dart';
 import 'package:linku/common/layout/default_layout.dart';
+import 'package:linku/user/screeen/profile_screen.dart';
 
 class RootScreen extends StatelessWidget {
   final Widget child;
@@ -13,6 +14,7 @@ class RootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
+      title: child is ProfileScreen ? '내 정보' : null,
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: PRIMARY_COLOR,
         unselectedItemColor: TEXT_COLOR,

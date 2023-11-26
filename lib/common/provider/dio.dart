@@ -40,16 +40,20 @@ class CustomExceptionHandler extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print(
-      '[RES] [${response.requestOptions.method}] ${response.requestOptions.uri} : ${response.statusCode}',
-    );
+    try {
+      print(
+        '[RES] [${response.requestOptions.method}] ${response.requestOptions.uri} : ${response.statusCode}',
+      );
+    } catch (e) {
+      print(e);
+    }
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     print(
-      '[ERR] [${err.requestOptions.method}] ${err.requestOptions.uri} ${err.response?.statusCode}',
+      '[ERR] [${err.requestOptions.method}] ${err.requestOptions.uri} ${err.response?.statusCode} ${err.response}',
     );
 
     final refreshToken = await storage.read(key: refreshTokenKey);

@@ -9,8 +9,10 @@ import 'package:linku/user/provider/auth_provider.dart';
 import 'package:linku/user/screeen/edit_profile_screen.dart';
 import 'package:linku/user/screeen/login_screen.dart';
 import 'package:linku/user/screeen/pending_screen.dart';
+import 'package:linku/user/screeen/propose_screen.dart';
 import 'package:linku/user/screeen/profile_screen.dart';
 import 'package:linku/user/screeen/register_screen.dart';
+import 'package:linku/user/screeen/search_screen.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -19,7 +21,7 @@ final goRouterProvider = Provider<GoRouter>(
     final provider = ref.read(authProvider);
     return GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/login',
+      initialLocation: '/home',
       debugLogDiagnostics: true,
       refreshListenable: provider,
       redirect: provider.redirectAuthLogic,
@@ -65,6 +67,14 @@ final goRouterProvider = Provider<GoRouter>(
               builder: (context, state) => TagEditScreen(),
             ),
           ],
+        ),
+        GoRoute(
+          path: '/propose',
+          builder: (context, state) => ProposeScreen(),
+        ),
+        GoRoute(
+          path: '/search',
+          builder: (context, state) => SearchScreen(),
         ),
       ],
     );

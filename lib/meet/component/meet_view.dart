@@ -37,6 +37,7 @@ class MeetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultCardLayout(
+      routerPath: '/home/$id',
       borderColor: PRIMARY_COLOR,
       child: Expanded(
         child: Column(

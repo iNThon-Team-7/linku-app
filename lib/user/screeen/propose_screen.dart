@@ -3,7 +3,6 @@ import 'package:date_time_picker_selector/date_time_picker_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:input_quantity/input_quantity.dart';
 import 'package:number_selector/number_selector.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

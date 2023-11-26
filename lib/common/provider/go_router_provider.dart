@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:linku/common/screen/home_screen.dart';
 import 'package:linku/common/screen/root_screen.dart';
 import 'package:linku/common/screen/splash_screen.dart';
+import 'package:linku/history/screen/history_screen.dart';
 import 'package:linku/meet/screen/meet_detail_screen.dart';
 import 'package:linku/tag/screen/tag_edit_screen.dart';
 import 'package:linku/tag/screen/tag_single_screen.dart';
@@ -73,6 +74,11 @@ final goRouterProvider = Provider<GoRouter>(
               ],
             ),
             GoRoute(
+              path: 'history',
+              pageBuilder: (context, state) =>
+                  NoTransitionPage(child: RootScreen(child: HistoryScreen())),
+            ),
+            GoRoute(
               path: 'tag',
               builder: (context, state) => TagEditScreen(),
               routes: [
@@ -93,6 +99,14 @@ final goRouterProvider = Provider<GoRouter>(
               builder: (context, state) => SearchScreen(),
             ),
           ],
+        ),
+        GoRoute(
+          path: '/propose',
+          builder: (context, state) => ProposeScreen(),
+        ),
+        GoRoute(
+          path: '/search',
+          builder: (context, state) => SearchScreen(),
         ),
       ],
     );

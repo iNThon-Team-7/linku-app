@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:group_list_view/group_list_view.dart';
-import 'package:linku/user/screeen/widgets/profile_card.dart';
+import 'package:linku/user/screeen/widgets/propose_card.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -62,10 +62,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   return searchResults.values.toList()[section].length;
                 },
                 itemBuilder: (context, index){
-                  return ProfileCard(
+                  return ProposeCard(
                     imageUrl: 'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
                     title: 'Klay Lewis',
-                    subTitle: '20131101:1200',
+                    startDate: '201311011200',
                   );
                 },
                 groupHeaderBuilder: (BuildContext context, int section) {

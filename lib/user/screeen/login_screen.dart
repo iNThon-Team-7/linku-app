@@ -70,6 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               CustomButton(
                 text: 'Force Login',
                 onPressed: () {
+                  ref.read(userProvider.notifier).loginInstatnt();
                   ref.read(userProvider.notifier).setUser(
                         UserModel(
                           id: 1,

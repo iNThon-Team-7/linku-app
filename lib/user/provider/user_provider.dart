@@ -48,6 +48,17 @@ class UserStateNotifier extends StateNotifier<UserModelBase?> {
     }
   }
 
+
+  Future<void> loginInstatnt() async {
+    try {
+      await storage.write(key: accessTokenKey, value: accessTokenExam);
+      await storage.write(key: refreshTokenKey, value: "refreshToken");
+      await getMe();
+    } catch (e) {
+      //TODO: handle error
+    }
+  }
+
   Future<void> login({
     required LoginModel loginModel,
   }) async {

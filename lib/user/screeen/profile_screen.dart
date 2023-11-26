@@ -157,7 +157,7 @@ class ProfileScreen extends ConsumerWidget {
                         height: 4.h,
                       ),
                       Text(
-                        user.intro,
+                        user.intro ?? '자기소개가 없습니다.',
                         style: defaultTextStyle.copyWith(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,

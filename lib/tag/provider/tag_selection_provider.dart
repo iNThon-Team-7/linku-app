@@ -15,6 +15,16 @@ final tagSelectionProvider =
   );
 });
 
+final singleTagSelectionProvider =
+    StateNotifierProvider<StateNotifierProviderTagSelection, List<TagModel>>(
+        (ref) {
+  final repository = ref.read(tagRepositoryProvider);
+  return StateNotifierProviderTagSelection(
+    repository: repository,
+    initialTags: [],
+  );
+});
+
 class StateNotifierProviderTagSelection extends StateNotifier<List<TagModel>> {
   final TagRepository repository;
   final List<TagModel> initialTags = [];
@@ -22,6 +32,10 @@ class StateNotifierProviderTagSelection extends StateNotifier<List<TagModel>> {
     required this.repository,
     required List<TagModel> initialTags,
   }) : super(initialTags);
+
+  void single(TagModel tag) {
+    state = [tag];
+  }
 
   Future<void> add(TagModel tag) async {
     state = [...state, tag];

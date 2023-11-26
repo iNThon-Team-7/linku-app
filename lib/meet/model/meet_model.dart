@@ -4,8 +4,19 @@ import 'package:linku/user/model/user_model.dart';
 
 part 'meet_model.g.dart';
 
+abstract class MeetModelBase {}
+
+class MeetModelLoading extends MeetModelBase {}
+
+class MeetModelError extends MeetModelBase {
+  final String message;
+  MeetModelError({
+    this.message = 'MeetModelError',
+  });
+}
+
 @JsonSerializable()
-class MeetModel {
+class MeetModel extends MeetModelBase {
   final int id;
   final UserModel host;
   final String title;

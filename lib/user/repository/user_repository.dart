@@ -21,4 +21,18 @@ abstract class UserRepository {
     'accessToken': 'true',
   })
   Future<UserModel> getMe();
+
+  @PATCH('/profile')
+  @Headers({
+    'accessToken': 'true',
+  })
+  Future<void> updateProfile(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @PATCH('/image')
+  @Headers({'accessToken': 'true', 'Content-Type': 'multipart/form-data'})
+  Future<void> updateProfileImage(
+    @Body() FormData image,
+  );
 }

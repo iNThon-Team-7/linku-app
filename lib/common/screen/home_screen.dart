@@ -33,17 +33,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   }
 
   Map<String, List> _elements = {
-    'Team A': ['Klay Lewis', 'Ehsan Woodard', 'River Bains'],
-    'Team B': ['Toyah Downs', 'Tyla Kane'],
-    'Team C': ['Marcus Romero', 'Farrah Parkes', 'Fay Lawson', 'Asif Mckay'],
-    'Team D': [
-      'Casey Zuniga',
-      'Ayisha Burn',
-      'Josie Hayden',
-      'Kenan Walls',
-      'Mario Powers',
-    ],
-    'Team Q': ['Toyah Downs', 'Tyla Kane', 'Toyah Downs'],
+    '칵테일': ['Klay Lewis', 'Ehsan Woodard', 'River Bains'],
+    '롤': ['Toyah Downs', 'Tyla Kane'],
+    '러닝': ['Marcus Romero', 'Farrah Parkes', 'Fay Lawson', 'Asif Mckay'],
   };
 
   @override

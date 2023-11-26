@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:linku/common/const/data.dart';
 import 'package:linku/common/provider/dio.dart';
+import 'package:linku/common/provider/go_router_provider.dart';
+import 'package:linku/common/provider/pending_provider.dart';
 
 final fcmTokenProvider =
     StateNotifierProvider<FcmTokenStateNotifier, String>((ref) {
@@ -82,6 +84,10 @@ Future<void> fcmMessageHandler(
 ) async {
   await Firebase.initializeApp();
   print('Handling a message ${message.messageId}, ${message.data['title']}');
+  fcmActionHandler(
+    context: rootNavigatorKey.currentContext!,
+    container: container,
+  );
 }
 
 @pragma('vm:entry-point')
@@ -90,6 +96,13 @@ fcmOnOpenedAppHandler({
   required ProviderContainer container,
 }) async {
   print('message opened by : ${message.messageId}, ${message.data}');
+  if (message.data['type'] == 'certificate') {
+    container.read(pendingProvider.notifier).update((state) => true);
+  }
+  fcmActionHandler(
+    context: rootNavigatorKey.currentContext!,
+    container: container,
+  );
 }
 
 fcmActionHandler({

@@ -106,6 +106,14 @@ class ProfileScreen extends ConsumerWidget {
             );
           },
         ),
+        if (kDebugMode)
+        IconTitleFunctionModel(
+          iconData: Icons.token_outlined,
+          title: 'go pending',
+          onTap: () {
+            context.go('/pending');
+          },
+        ),
     ];
     //copy footerList contents into infoList
     return ListView(

@@ -12,7 +12,7 @@ part 'history_repository.g.dart';
 final historyPaginationRepositoryProvider =
 Provider<HistoryPaginationRepository>((ref) {
   final dio = ref.watch(dioProvider);
-  return HistoryPaginationRepository(dio, baseUrl: '$ip/history');
+  return HistoryPaginationRepository(dio, baseUrl: '$ip/meet/join');
 });
 
 @RestApi()

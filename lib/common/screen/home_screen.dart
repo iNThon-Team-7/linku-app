@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:group_list_view/group_list_view.dart';
-import 'package:linku/user/screeen/widgets/profile_card.dart';
+import 'package:linku/user/screeen/widgets/propose_card.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -67,10 +67,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   return _elements.values.toList()[section].length;
                 },
                 itemBuilder: (context, index){
-                  return ProfileCard(
+                  return ProposeCard(
                     imageUrl: 'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
                     title: 'Klay Lewis',
-                    subTitle: '20131101:0102',
+                    startDate: '201311010102',
                   );
                 },
                 groupHeaderBuilder: (BuildContext context, int section) {

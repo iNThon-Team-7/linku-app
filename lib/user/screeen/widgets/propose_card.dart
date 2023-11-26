@@ -6,11 +6,11 @@ class ProposeCard extends StatelessWidget {
       {super.key,
       required this.title,
       required this.imageUrl,
-      required this.subTitle});
+      required this.startDate});
 
   final String title;
   final String imageUrl;
-  final String subTitle;
+  final String startDate;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +36,15 @@ class ProposeCard extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           subtitle: Text(
-            subTitle.substring(0, 4) +
+            startDate.substring(0, 4) +
                 '년 ' +
-                subTitle.substring(4, 6) +
+                startDate.substring(4, 6) +
                 '월 ' +
-                subTitle.substring(6, 8) +
+                startDate.substring(6, 8) +
                 '일' +
-                subTitle.substring(8, 10) +
+                startDate.substring(8, 10) +
                 '시' +
-                subTitle.substring(10, 12) +
+                startDate.substring(10, 12) +
                 '분' + '에 모임',
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
           ),

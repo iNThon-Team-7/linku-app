@@ -5,7 +5,9 @@ import 'package:linku/common/screen/home_screen.dart';
 import 'package:linku/common/screen/root_screen.dart';
 import 'package:linku/common/screen/splash_screen.dart';
 import 'package:linku/history/screen/history_screen.dart';
+import 'package:linku/meet/screen/meet_detail_screen.dart';
 import 'package:linku/tag/screen/tag_edit_screen.dart';
+import 'package:linku/tag/screen/tag_single_screen.dart';
 import 'package:linku/user/provider/auth_provider.dart';
 import 'package:linku/user/screeen/edit_profile_screen.dart';
 import 'package:linku/user/screeen/login_screen.dart';
@@ -51,6 +53,14 @@ final goRouterProvider = Provider<GoRouter>(
               path: 'home',
               pageBuilder: (context, state) =>
                   NoTransitionPage(child: RootScreen(child: HomeScreen())),
+              routes: [
+                GoRoute(
+                  path: ':id',
+                  builder: (context, state) => MeetDetailScreen(
+                    id: int.parse(state.pathParameters['id']!),
+                  ),
+                ),
+              ],
             ),
             GoRoute(
               path: 'profile',
@@ -71,6 +81,22 @@ final goRouterProvider = Provider<GoRouter>(
             GoRoute(
               path: 'tag',
               builder: (context, state) => TagEditScreen(),
+              routes: [
+                GoRoute(
+                  path: 'single',
+                  builder: (context, state) => TagSingleScreen(),
+                ),
+              ],
+            ),
+            GoRoute(
+              path: 'propose',
+              pageBuilder: (context, state) => NoTransitionPage(
+                child: RootScreen(child: ProposeScreen()),
+              ),
+            ),
+            GoRoute(
+              path: 'search',
+              builder: (context, state) => SearchScreen(),
             ),
           ],
         ),
@@ -82,7 +108,6 @@ final goRouterProvider = Provider<GoRouter>(
           path: '/search',
           builder: (context, state) => SearchScreen(),
         ),
-
       ],
     );
   },

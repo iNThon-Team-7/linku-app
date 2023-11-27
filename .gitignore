@@ -51,6 +51,8 @@ app.*.map.json
 /android/fastlane/*.json
 /android/fastlane/metadata/*
 
+ios/Runner/GoogleService-Info.plist
+
 ios/*.json
 
 *.g.dart

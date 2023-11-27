@@ -106,7 +106,7 @@ class ProfileScreen extends ConsumerWidget {
             );
           },
         ),
-        if (kDebugMode)
+      if (kDebugMode)
         IconTitleFunctionModel(
           iconData: Icons.token_outlined,
           title: 'go pending',
@@ -155,7 +155,7 @@ class ProfileScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        user.name,
+                        user.name ?? '이름 없음',
                         style: defaultTextStyle.copyWith(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w700,

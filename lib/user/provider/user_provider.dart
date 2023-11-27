@@ -48,7 +48,6 @@ class UserStateNotifier extends StateNotifier<UserModelBase?> {
     }
   }
 
-
   Future<void> loginInstatnt() async {
     try {
       print("loginInstatnt");
@@ -80,8 +79,6 @@ class UserStateNotifier extends StateNotifier<UserModelBase?> {
 
   Future<void> logout() async {
     try {
-      await repository.logout();
-
       await storage.delete(key: accessTokenKey);
       await storage.delete(key: refreshTokenKey);
 

@@ -64,6 +64,7 @@ class AuthProvider extends ChangeNotifier {
     final isLogginIn = state.location == '/login';
     final isSplashScreen = state.location == '/splash';
     final isRegistering = state.location == '/register';
+    final isPending = state.location == '/pending';
 
     if (checkPending()) {
       return '/pending';
@@ -77,7 +78,7 @@ class AuthProvider extends ChangeNotifier {
     }
 
     if (user is UserModel) {
-      if (isSplashScreen || isLogginIn || isRegistering) {
+      if (isSplashScreen || isLogginIn || isRegistering || isPending) {
         return '/home';
       }
     }

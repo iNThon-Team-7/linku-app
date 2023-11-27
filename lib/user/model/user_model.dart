@@ -32,7 +32,7 @@ class UserModelError extends UserModelBase {
 @JsonSerializable()
 class UserModel extends UserModelBase {
   final int id;
-  final String name;
+  final String? name;
   final String? intro;
   final String? email;
   final UserRole? role;

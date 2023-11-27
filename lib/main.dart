@@ -120,6 +120,7 @@ class _App extends ConsumerWidget {
               : const Size(375, 500),
       scaleByHeight: MediaQuery.of(context).size.width > 450,
       builder: (context, child) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: router,
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,

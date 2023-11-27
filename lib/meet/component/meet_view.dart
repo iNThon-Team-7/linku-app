@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:linku/common/component/custom_outlined_button.dart';
 import 'package:linku/common/const/color.dart';
+import 'package:linku/common/const/data.dart';
 import 'package:linku/common/layout/default_card_layout.dart';
 import 'package:linku/common/style/default_text_style.dart';
 import 'package:linku/common/utils/utils.dart';
@@ -39,6 +40,7 @@ class MeetView extends StatelessWidget {
     return DefaultCardLayout(
       routerPath: '/home/$id',
       borderColor: PRIMARY_COLOR,
+      imgUrl: '$ip/user/${host.id}/image',
       child: Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +62,7 @@ class MeetView extends StatelessWidget {
                 ),
                 SizedBox(width: 5.w),
                 Text(
-                  host.name,
+                  host.name ?? '이름 없음',
                   style: defaultTextStyle.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,

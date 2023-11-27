@@ -29,7 +29,7 @@ class ProposeScreen extends ConsumerStatefulWidget {
 class _ProposeScreenState extends ConsumerState<ProposeScreen> {
   int filterValue = 2;
   int minAge = 0;
-  int maxAge = 100;
+  int maxAge = 99;
   String title = '';
   String place = '';
   String content = '';

@@ -99,6 +99,10 @@ fcmOnOpenedAppHandler({
   if (message.data['type'] == 'certificate') {
     container.read(pendingProvider.notifier).update((state) => true);
   }
+  if (message.data['type'] == 'newMeet') {
+    final meetId = message.data['meetId'];
+    container.read(goRouterProvider).go('/home/$meetId');
+  }
   fcmActionHandler(
     context: rootNavigatorKey.currentContext!,
     container: container,

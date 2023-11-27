@@ -59,7 +59,7 @@ class HistoryView extends StatelessWidget {
                 ),
                 SizedBox(width: 5.w),
                 Text(
-                  host.name,
+                  host.name ?? '이름 없음',
                   style: defaultTextStyle.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
